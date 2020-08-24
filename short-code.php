@@ -36,19 +36,21 @@ function scriptsPage()
     ?>
     <div class="wrap">
         <h2>Update Scripts on the header and footer</h2>
-
-        <label for="header-scripts">header Scripts</label>
-        <textarea name="header-scripts" class="large-text" id="" cols="30" rows="10">
-            <?php 
-                print($header_scripts);
-            ?>
-        </textarea>
-        <label for="footer-scripts">Footer Scripts</label>
-        <textarea name="footer-scripts" class="large-text" id="" cols="30" rows="10">
-            <?php 
-                print($footer_scripts);
-            ?>
-        </textarea>
+        <form action="" method="post">
+            <label for="header-scripts">header Scripts</label>
+            <textarea name="header-scripts" class="large-text" id="">
+                <?php 
+                    print($header_scripts);
+                ?>
+            </textarea>
+            <label for="footer-scripts">Footer Scripts</label>
+            <textarea name="footer-scripts" class="large-text" id="">
+                <?php 
+                    print($footer_scripts);
+                ?>
+            </textarea>
+            <input type="submit" name="submit_scripts" class="button button-primary"value="submit">
+        </form>
     </div>
     <?php
 }
