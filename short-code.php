@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Short-Code
  *
@@ -118,6 +119,8 @@ function setHtmlContentType()
 
 function wpFormCapture()
 {
+    global $post;
+
     if(array_key_exists('submitForm', $_POST))
     {
         $to = "agavi2014@hotmail.com";
@@ -133,6 +136,18 @@ function wpFormCapture()
 
         remove_filter('wp_mail_content_type', 'setHtmlContentType');
     }
+
+    $time = current_time('mysql');
+
+    $comment_data = [
+        "comment_post_ID" => $post->ID,
+        "comment_content" => $body,
+        "comment_author_IP" => $_SERVER['REMOTE_ADDR'],
+        "comment_date" => $time,
+        "comment_approved" => 1
+    ];
+    
+    wp_insert_comment($comment_data);
 }
 
 add_action('wp_head', 'wpFormCapture');
