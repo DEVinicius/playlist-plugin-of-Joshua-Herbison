@@ -31,7 +31,26 @@ function adminMenuOption()
 
 function scriptsPage()
 {
-    
+    $header_scripts = get_option('header-scripts', 'none');
+    $footer_scripts = get_option('footer-scripts', 'none');
+    ?>
+    <div class="wrap">
+        <h2>Update Scripts on the header and footer</h2>
+
+        <label for="header-scripts">header Scripts</label>
+        <textarea name="header-scripts" class="large-text" id="" cols="30" rows="10">
+            <?php 
+                print($header_scripts);
+            ?>
+        </textarea>
+        <label for="footer-scripts">Footer Scripts</label>
+        <textarea name="footer-scripts" class="large-text" id="" cols="30" rows="10">
+            <?php 
+                print($footer_scripts);
+            ?>
+        </textarea>
+    </div>
+    <?php
 }
 
 add_action("admin_menu", 'adminMenuOption');
