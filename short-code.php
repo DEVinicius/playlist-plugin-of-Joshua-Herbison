@@ -90,4 +90,40 @@ function displayFooterScripts()
     print $footer_scripts;
 }
 
-add_action('wp_foot', 'displayFooterScripts');
+add_action('wp_footer', 'displayFooterScripts');
+
+/* 
+    GETTING E-MAIL
+*/
+
+function wpForm()
+{
+    $content = '<form method="post" action="http://localhost/plugin_wp/index.php/thank-you/">';
+        $content .= '<input type="text" name="full_name" placeholder="Your full name"><br>';
+        $content .= '<input type="text" name="email" placeholder="Your E-mail"><br>';
+        $content .= '<input type="text" name="phone" placeholder="Your Phone Number"><br>';
+        $content .= '<textarea name="comments" placeholder = "comments"></textarea><br>';
+        $content .= '<input type="submit" name="submitForm" value="SUBMIT YOUR INFORMATION"><br>';
+    $content .= '</form>';
+
+    return $content;
+}
+
+add_shortcode('ViniciusForm','wpForm'); 
+
+function wpFormCapture()
+{
+    if(array_key_exists('submitForm', $_POST))
+    {
+        $to = "agavi2014@hotmail.com";
+        $subject = "Exemple In my plugin development";
+        $body = 'Name: '.$_POST['full_name'].'<br>';
+        $body .= 'Email: '.$_POST['email'].'<br>';
+        $body .= 'Phone Number: '.$_POST['phone'].'<br>';
+        $body .= 'Comments: '.$_POST['comments'].'<br>';
+
+        wp_mail($to, $subject, $body);
+    }
+}
+
+add_action('wp_head', 'wpFormCapture');
