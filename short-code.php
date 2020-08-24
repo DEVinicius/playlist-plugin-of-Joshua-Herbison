@@ -111,6 +111,11 @@ function wpForm()
 
 add_shortcode('ViniciusForm','wpForm'); 
 
+function setHtmlContentType()
+{
+    return 'text/html';
+}
+
 function wpFormCapture()
 {
     if(array_key_exists('submitForm', $_POST))
@@ -122,7 +127,11 @@ function wpFormCapture()
         $body .= 'Phone Number: '.$_POST['phone'].'<br>';
         $body .= 'Comments: '.$_POST['comments'].'<br>';
 
+        add_filter('wp_mail_content_type', 'setHtmlContentType');
+
         wp_mail($to, $subject, $body);
+
+        remove_filter('wp_mail_content_type', 'setHtmlContentType');
     }
 }
 
