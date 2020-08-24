@@ -45,7 +45,7 @@ function scriptsPage()
         </div>
         <?php 
     }
-    
+
     $header_scripts = get_option('header-scripts-text', 'none');
     $footer_scripts = get_option('footer-scripts-text', 'none');
 
@@ -72,3 +72,22 @@ function scriptsPage()
 }
 
 add_action("admin_menu", 'adminMenuOption');
+
+function displayHeaderScripts()
+{
+    $header_scripts = get_option('header-scripts-text', 'none');
+
+    print $header_scripts;
+}
+
+add_action('wp_head', 'displayHeaderScripts');
+
+
+function displayFooterScripts()
+{
+    $footer_scripts = get_option('footer-scripts-text', 'none');
+
+    print $footer_scripts;
+}
+
+add_action('wp_foot', 'displayFooterScripts');
