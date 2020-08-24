@@ -31,8 +31,24 @@ function adminMenuOption()
 
 function scriptsPage()
 {
-    $header_scripts = get_option('header-scripts', 'none');
-    $footer_scripts = get_option('footer-scripts', 'none');
+    if(array_key_exists('submit_scripts', $_POST))
+    {
+        /*Update function from WP */
+        update_option('header-scripts-text', $_POST['header-scripts']);
+        update_option('footer-scripts-text', $_POST['footer-scripts']);
+
+        ?>
+        <div>
+            <strong>
+                Updated
+            </strong> 
+        </div>
+        <?php 
+    }
+    
+    $header_scripts = get_option('header-scripts-text', 'none');
+    $footer_scripts = get_option('footer-scripts-text', 'none');
+
     ?>
     <div class="wrap">
         <h2>Update Scripts on the header and footer</h2>
